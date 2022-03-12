@@ -1,0 +1,19 @@
+import { 
+	useState,
+	useEffect,
+	// useCallback,
+	// useMemo,
+	// useRef
+} from 'react';
+
+const {{name}} = () => {
+	const [state, setState] = useState();
+
+	useEffect(() => {
+		// some effect
+	}, [state]);
+
+	return { state, setState };
+};
+
+export default {{name}};
