@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"baseUrl": "src",
+		"paths": {
+			"game": ["containers/game"],
+			"game/*": ["containers/game/*"]
+		}
+	}
+}
