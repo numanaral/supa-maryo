@@ -1,6 +1,8 @@
-import { Map } from './components';
-import { GameProvider } from './providers';
-import { Game } from './types';
+import { GameProvider } from 'game/providers';
+import { Game } from 'game/types';
+import GameMap from '../GameMap';
+import GameContainer from '../GameContainer';
+import GameCharacter from '../GameCharacter';
 import 'game/styles.scss';
 
 interface Props {
@@ -10,7 +12,9 @@ interface Props {
 const GameWindow = ({ playerOptions }: Props) => {
 	return (
 		<GameProvider playerOptions={playerOptions}>
-			<Map />
+			<GameContainer>
+				<GameMap />
+			</GameContainer>
 		</GameProvider>
 	);
 };

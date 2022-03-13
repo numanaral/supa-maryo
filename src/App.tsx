@@ -1,7 +1,7 @@
-import GameWindow from 'game';
+import Game from 'game';
 
 function App() {
-	return <GameWindow />;
+	return <Game />;
 }
 
 export default App;

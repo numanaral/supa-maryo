@@ -2,4 +2,5 @@ export * from './components';
 export * from './hooks';
 export * from './providers';
 export * from './types';
-export { default } from './GameWindow';
+export * from './enums';
+export { default } from './components/GameWindow';
