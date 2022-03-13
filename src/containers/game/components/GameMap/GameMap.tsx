@@ -1,5 +1,6 @@
+import { memo } from 'react';
 import styled, { css } from 'styled-components/macro';
-import { useGameContext } from 'game/hooks';
+import { useGameState } from 'game/hooks';
 import { Game } from 'game/types';
 import { StyleClassNames } from 'game/constants';
 import { MAP_HEIGHT, MAPS } from './constants';
@@ -9,7 +10,7 @@ interface Props {
 	level: Game.Levels;
 }
 
-const Wrapper = styled(Scaled)<{
+const Wrapper = memo(styled(Scaled)<{
 	$mapBg: string;
 	$h: number;
 }>`
@@ -17,13 +18,13 @@ const Wrapper = styled(Scaled)<{
 		background-image: url(${$mapBg});
 		height: ${$h}px;
 	`}
-`;
+`);
 
 const GameMap = () => {
 	const {
 		level: { level },
 		view: { scale },
-	} = useGameContext();
+	} = useGameState();
 	return (
 		<Wrapper
 			className={StyleClassNames.PixelArt}

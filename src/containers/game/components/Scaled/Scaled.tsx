@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components/macro';
-import { Game } from 'game/types';
-import { useGameContext } from 'game/hooks';
 import { forwardRef } from 'react';
+import styled, { css } from 'styled-components/macro';
+import { useViewState } from 'game/hooks';
+import { Game } from 'game/types';
 
 const Wrapper = styled.div<{
 	$scale: Game.Scale;
@@ -19,9 +19,7 @@ const Scaled = forwardRef<
 		HTMLDivElement
 	>
 >(({ children, ...rest }, ref) => {
-	const {
-		view: { scale },
-	} = useGameContext();
+	const { scale } = useViewState();
 	return (
 		<Wrapper $scale={scale} {...rest} ref={ref}>
 			{children}
