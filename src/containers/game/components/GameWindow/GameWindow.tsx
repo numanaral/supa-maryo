@@ -14,6 +14,7 @@ const GameWindow = ({ playerOptions }: Props) => {
 		<GameProvider playerOptions={playerOptions}>
 			<GameContainer>
 				<GameMap />
+				<GameCharacter />
 			</GameContainer>
 		</GameProvider>
 	);
