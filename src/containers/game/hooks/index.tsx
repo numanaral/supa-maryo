@@ -1,3 +1,4 @@
+export { default as useGameReducer } from './useGameReducer';
 export { default as useGameScale } from './useGameScale';
 export { default as useGameState } from './useGameState';
 export { default as useGameContext } from './useGameContext';
