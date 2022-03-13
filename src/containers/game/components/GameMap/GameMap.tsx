@@ -2,7 +2,6 @@ import { memo } from 'react';
 import styled, { css } from 'styled-components/macro';
 import { useGameState } from 'game/hooks';
 import { Game } from 'game/types';
-import { StyleClassNames } from 'game/constants';
 import { MAP_HEIGHT, MAPS } from './constants';
 import Scaled from '../Scaled';
 
@@ -27,7 +26,7 @@ const GameMap = () => {
 	} = useGameState();
 	return (
 		<Wrapper
-			className={StyleClassNames.PixelArt}
+			className="pixel-art"
 			$mapBg={MAPS[level]}
 			$h={MAP_HEIGHT * scale}
 		/>

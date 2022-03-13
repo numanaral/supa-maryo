@@ -9,7 +9,7 @@ import { Keyboard } from 'game/types';
 import { getCharacterPropsFromKeyCode } from 'game/utils';
 import { DEFAULT_KEYBOARD_CONFIG } from 'game/constants';
 
-const useHandleCharacterStateAndDirection = () => {
+const useHandleCharacterActions = () => {
 	// TODO: Move to context:
 	const keyboardConfig = DEFAULT_KEYBOARD_CONFIG;
 	const position = CharacterPosition.OnTile;
@@ -17,22 +17,19 @@ const useHandleCharacterStateAndDirection = () => {
 	const [state, setState] = useState<CharacterState>(CharacterState.Standing);
 	const [direction, setDirection] = useState<Direction>(Direction.Right);
 	useEffect(() => {
-		// ignore the npc action
-		const getStateAndDirection = (e: KeyboardEvent) => {
-			return keyboardConfig
-				? getCharacterPropsFromKeyCode(
-						position,
-						e.code as Keyboard.EventCode,
-						keyboardConfig
-				  )
-				: {};
+		const getCharacterProps = (e: KeyboardEvent) => {
+			return getCharacterPropsFromKeyCode(
+				position,
+				e.code as Keyboard.EventCode,
+				keyboardConfig
+			);
 		};
 		const handleKeyDown = (e: KeyboardEvent) => {
 			const {
 				action: newAction,
 				state: newState = CharacterState.Standing,
 				direction: newDirection,
-			} = getStateAndDirection(e);
+			} = getCharacterProps(e);
 			setAction(newAction || null);
 			setState(newState);
 			if (newDirection && direction !== newDirection) {
@@ -55,4 +52,4 @@ const useHandleCharacterStateAndDirection = () => {
 	return { action, state, direction } as const;
 };
 
-export default useHandleCharacterStateAndDirection;
+export default useHandleCharacterActions;

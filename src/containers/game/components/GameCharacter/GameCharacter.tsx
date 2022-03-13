@@ -1,8 +1,4 @@
-import {
-	useGameContext,
-	useHandleCharacterStateAndDirection,
-} from 'game/hooks';
-import { StyleClassNames } from 'game/constants';
+import { useCharacterState, useHandleCharacterActions } from 'game/hooks';
 import { CHARACTERS } from './constants';
 import Scaled from '../Scaled';
 import './styles.scss';
@@ -23,18 +19,16 @@ const demoClasses = getDemoClasses();
 // };
 
 const GameCharacter = () => {
-	const {
-		character: { character, top, left },
-	} = useGameContext();
+	const { character, top, left } = useCharacterState();
 
 	const characterBg = CHARACTERS[character];
 
 	const { state: characterState, direction: characterDirection } =
-		useHandleCharacterStateAndDirection();
+		useHandleCharacterActions();
 
 	return (
 		<Scaled
-			className={`character-wrapper ${StyleClassNames.PixelArt}${demoClasses}`}
+			className={`character-wrapper pixel-art${demoClasses}`}
 			style={{
 				top,
 				left,

@@ -21,10 +21,6 @@ const DEFAULT_GAME_OPTIONS: Omit<Game.State, 'utils'> = {
 	},
 };
 
-const StyleClassNames = {
-	PixelArt: 'pixel-art',
-};
-
 const DEFAULT_KEYBOARD_CONFIG: Keyboard.KeyboardConfig = {
 	[CharacterAction.RunRight]: [KeyCode.CODE_RIGHT, KeyCode.CODE_D],
 	[CharacterAction.RunLeft]: [KeyCode.CODE_LEFT, KeyCode.CODE_A],
@@ -40,6 +36,5 @@ const DEFAULT_KEYBOARD_CONFIG: Keyboard.KeyboardConfig = {
 export {
 	DEFAULT_PLAYER_OPTIONS,
 	DEFAULT_GAME_OPTIONS,
-	StyleClassNames,
 	DEFAULT_KEYBOARD_CONFIG,
 };
