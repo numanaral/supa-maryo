@@ -1,11 +1,10 @@
-import { MAP_HEIGHT, TILE_SIZE } from './components';
 import {
 	CharacterAction,
 	CharacterPosition,
 	CharacterState,
 	Direction,
-} from './enums';
-import { Game, Keyboard } from './types';
+} from 'game/enums';
+import { Keyboard } from 'game/types';
 
 const ACTION_KEYS = Object.keys(CharacterAction) as Array<CharacterAction>;
 const ACTION_COUNT = ACTION_KEYS.length;
@@ -75,20 +74,4 @@ const getCharacterPropsFromKeyCode = (
 	return { action, state, direction } as const;
 };
 
-const getMapConfig = (level: Game.Levels, scale: Game.Scale) => {
-	const mapConfig: Record<Game.Levels, Game.MapConfig> = {
-		'1-1': {
-			// 2 tiles + actual block.
-			characterTop: (MAP_HEIGHT - TILE_SIZE * (2 + 1)) * scale,
-			characterLeft: 0,
-		},
-	};
-
-	return mapConfig[level];
-};
-
-const calculateGameScale = (windowObj: Window = window) => {
-	return windowObj.innerHeight / MAP_HEIGHT;
-};
-
-export { getCharacterPropsFromKeyCode, getMapConfig, calculateGameScale };
+export default getCharacterPropsFromKeyCode;
