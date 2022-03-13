@@ -27,16 +27,32 @@ namespace Game {
 		left: Position;
 	}
 
-	export interface GameUtils {
-		onCharacterAction: (action: CharacterAction) => void;
-	}
-
 	export interface State {
 		view: ViewState;
 		level: LevelState;
 		character: CharacterState;
-		utils: GameUtils;
 	}
+
+	export interface CharacterActions {
+		onCharacterAction: (action: CharacterAction) => void;
+	}
+
+	export interface Actions extends CharacterActions {}
+
+	export interface Context {
+		state: State;
+		actions: Actions;
+	}
+
+	// TODO: Possibly move to a separate namespace.
+	export type ReducerActions =
+		| {
+				type: CharacterAction;
+		  }
+		| {
+				type: 'Resize';
+				scale: number;
+		  };
 
 	export interface PlayerOptions {
 		level?: Levels;

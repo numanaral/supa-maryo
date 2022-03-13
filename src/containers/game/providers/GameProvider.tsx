@@ -1,4 +1,4 @@
-import { useGameState } from 'game/hooks';
+import { useGameReducer } from 'game/hooks';
 import { Game } from 'game/types';
 import GameContext from './GameContext';
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const GameProvider: React.FC<Props> = ({ children, playerOptions }) => {
-	const state = useGameState(playerOptions);
+	const state = useGameReducer(playerOptions);
 	return (
 		<GameContext.Provider value={state}>{children}</GameContext.Provider>
 	);
