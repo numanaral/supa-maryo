@@ -3,7 +3,12 @@
 		"baseUrl": "src",
 		"paths": {
 			"game": ["containers/game"],
-			"game/*": ["containers/game/*"]
+			"game/*": ["containers/game/*"],
+			"components": ["components"],
+			"containers": ["containers"],
+			"providers": ["providers"],
+			"hooks": ["hooks"],
+			"utils/*": ["utils/*"]
 		}
 	}
 }
