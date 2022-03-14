@@ -1,4 +1,7 @@
 import * as KeyCode from 'keycode-js';
+// BUG: This causes some weird issue..
+// import { MAP_HEIGHT } from './components';
+import { MAP_HEIGHT } from 'game/components/GameMap/constants';
 import { CharacterAction } from './enums';
 import { Game, Keyboard } from './types';
 
@@ -16,7 +19,7 @@ const DEFAULT_GAME_OPTIONS: Omit<Game.State, 'utils'> = {
 	},
 	character: {
 		character: 'mario',
-		top: 0,
+		bottom: MAP_HEIGHT,
 		left: 0,
 	},
 };

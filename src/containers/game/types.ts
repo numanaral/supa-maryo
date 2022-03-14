@@ -2,14 +2,14 @@ import * as KeyCode from 'keycode-js';
 import { CharacterAction } from './enums';
 
 namespace Game {
-	export type Levels = '1-1';
+	export type Levels = '1-1' | '1-1-secret';
 	export type Characters = 'mario' | 'luigi';
 	export type Scale = number;
 	export type Position = Unit.Pixel;
 
 	// TODO:
 	export interface MapConfig {
-		characterTop: Position;
+		characterBottom: Position;
 		characterLeft: Position;
 	}
 
@@ -23,7 +23,7 @@ namespace Game {
 
 	export interface CharacterState {
 		character: Characters;
-		top: Position;
+		bottom: Position;
 		left: Position;
 	}
 

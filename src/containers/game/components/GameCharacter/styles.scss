@@ -39,7 +39,7 @@ $stateConfig:
 	position: absolute;
 	z-index: 9999;
 	transition-duration: 50ms;
-	transition-property: top left;
+	transition-property: bottom left;
 	transition-timing-function: ease-in-out;
 
 	.character {

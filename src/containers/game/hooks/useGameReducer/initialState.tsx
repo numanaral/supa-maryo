@@ -19,7 +19,7 @@ const getInitialState = (playerOptions?: Game.PlayerOptions) => {
 		character: {
 			...DEFAULT_GAME_OPTIONS.character,
 			character: _playerOptions.character,
-			top: mapConfig.characterTop,
+			bottom: mapConfig.characterBottom,
 			left: mapConfig.characterLeft,
 		},
 	};

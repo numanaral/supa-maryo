@@ -16,11 +16,11 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 			break;
 		case CharacterAction.Jump:
 			// TODO: Temp allow mario to fly.
-			draft.character.top -= MOVE_DISTANCE;
+			draft.character.bottom += MOVE_DISTANCE;
 			break;
 		case CharacterAction.Crouch:
 			// TODO: Temp allow mario to fly.
-			draft.character.top += MOVE_DISTANCE;
+			draft.character.bottom -= MOVE_DISTANCE;
 			break;
 		case 'Resize':
 			draft.view.scale = action.scale;
