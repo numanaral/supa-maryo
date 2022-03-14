@@ -1,30 +1,36 @@
-import { useCharacterState, useHandleCharacterActions } from 'game/hooks';
-import { CHARACTERS } from './constants';
-import Scaled from '../Scaled';
+import {
+	useCharacterState,
+	useGameActions,
+	useHandleCharacterActions,
+} from 'game/hooks';
+import { useInterval } from 'hooks';
+import { getDemoClasses } from 'game/utils';
+import { Scaled } from 'game/components';
+import { CHARACTERS, MOVE_INTERVAL } from './constants';
 import './styles.scss';
 
-// /?q&demo=true&speed=slow
-const getDemoClasses = () => {
-	const urlSearchParams = new URLSearchParams(window.location.href);
-	const demo = urlSearchParams.get('demo') === 'true';
-	const speed = urlSearchParams.get('speed') || 'fast';
-
-	if (!demo) return '';
-	return ` demo ${speed}`;
-};
 const demoClasses = getDemoClasses();
-
-// const demoStyle = (style: string) => {
-// 	return demo ? style : '';
-// };
 
 const GameCharacter = () => {
 	const { character, top, left } = useCharacterState();
+	const { onCharacterAction } = useGameActions();
 
 	const characterBg = CHARACTERS[character];
 
-	const { state: characterState, direction: characterDirection } =
-		useHandleCharacterActions();
+	const {
+		actions,
+		state: characterState,
+		direction: characterDirection,
+	} = useHandleCharacterActions();
+
+	useInterval(
+		() => {
+			if (!actions) return;
+			actions.forEach(onCharacterAction);
+		},
+		MOVE_INTERVAL,
+		!actions
+	);
 
 	return (
 		<Scaled

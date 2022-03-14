@@ -1,7 +1,7 @@
-import { Game } from 'game/types';
+import { Game, Unit } from 'game/types';
 
-const CHARACTER_SIZE = 16;
-const SPRITE_START_SMALL = 30;
+const CHARACTER_SIZE: Unit.Pixel = 16;
+const SPRITE_START_SMALL: Unit.Pixel = 30;
 
 /* eslint-disable global-require */
 const CHARACTERS: Record<Game.Characters, string> = {
@@ -10,4 +10,13 @@ const CHARACTERS: Record<Game.Characters, string> = {
 };
 /* eslint-enable global-require */
 
-export { CHARACTER_SIZE, SPRITE_START_SMALL, CHARACTERS };
+const MOVE_INTERVAL: Unit.Ms = 50;
+const MOVE_DISTANCE: Unit.Pixel = 10;
+
+export {
+	CHARACTER_SIZE,
+	SPRITE_START_SMALL,
+	CHARACTERS,
+	MOVE_INTERVAL,
+	MOVE_DISTANCE,
+};
