@@ -1,6 +1,7 @@
 import { Reducer } from 'use-immer';
 import { Game } from 'game/types';
 import { CharacterAction } from 'game/enums';
+import { MOVE_DISTANCE } from 'game/components/GameCharacter/constants';
 
 const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 	draft,
@@ -8,13 +9,18 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 ) => {
 	switch (action.type) {
 		case CharacterAction.RunRight:
-			draft.character.left += 10;
+			draft.character.left += MOVE_DISTANCE;
 			break;
 		case CharacterAction.RunLeft:
-			draft.character.left -= 10;
+			draft.character.left -= MOVE_DISTANCE;
 			break;
 		case CharacterAction.Jump:
-			draft.character.top -= 10;
+			// TODO: Temp allow mario to fly.
+			draft.character.top -= MOVE_DISTANCE;
+			break;
+		case CharacterAction.Crouch:
+			// TODO: Temp allow mario to fly.
+			draft.character.top += MOVE_DISTANCE;
 			break;
 		case 'Resize':
 			draft.view.scale = action.scale;

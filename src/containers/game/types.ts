@@ -5,7 +5,7 @@ namespace Game {
 	export type Levels = '1-1';
 	export type Characters = 'mario' | 'luigi';
 	export type Scale = number;
-	export type Position = number;
+	export type Position = Unit.Pixel;
 
 	// TODO:
 	export interface MapConfig {
@@ -103,9 +103,15 @@ namespace Utils {
 	export type ValuesOf<T> = Exclude<T[KeysOf<T>], Function>;
 }
 
+namespace Unit {
+	export type Pixel = number;
+	export type Second = number;
+	export type Ms = number;
+}
+
 namespace Keyboard {
 	export type EventCode = Utils.ValuesOf<typeof KeyCode>;
 	export type KeyboardConfig = Record<CharacterAction, Array<EventCode>>;
 }
 
-export type { Game, Utils, Keyboard };
+export type { Game, Utils, Unit, Keyboard };
