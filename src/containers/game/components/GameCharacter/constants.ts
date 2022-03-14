@@ -12,6 +12,7 @@ const CHARACTERS: Record<Game.Characters, string> = {
 
 const MOVE_INTERVAL: Unit.Ms = 50;
 const MOVE_DISTANCE: Unit.Pixel = 10;
+const MAX_JUMP_DISTANCE: Unit.Pixel = 5 * CHARACTER_SIZE;
 
 export {
 	CHARACTER_SIZE,
@@ -19,4 +20,5 @@ export {
 	CHARACTERS,
 	MOVE_INTERVAL,
 	MOVE_DISTANCE,
+	MAX_JUMP_DISTANCE,
 };

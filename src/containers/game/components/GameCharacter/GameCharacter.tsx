@@ -5,14 +5,14 @@ import {
 } from 'game/hooks';
 import { useInterval } from 'hooks';
 import { getDemoClasses } from 'game/utils';
-import { Scaled } from 'game/components';
+import Scaled from '../Scaled';
 import { CHARACTERS, MOVE_INTERVAL } from './constants';
 import './styles.scss';
 
 const demoClasses = getDemoClasses();
 
 const GameCharacter = () => {
-	const { character, top, left } = useCharacterState();
+	const { character, bottom, left } = useCharacterState();
 	const { onCharacterAction } = useGameActions();
 
 	const characterBg = CHARACTERS[character];
@@ -36,7 +36,7 @@ const GameCharacter = () => {
 		<Scaled
 			className={`character-wrapper pixel-art${demoClasses}`}
 			style={{
-				top,
+				bottom,
 				left,
 			}}
 		>

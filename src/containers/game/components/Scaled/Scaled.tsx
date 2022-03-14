@@ -6,7 +6,7 @@ import { Game } from 'game/types';
 const Wrapper = styled.div<{
 	$scale: Game.Scale;
 }>`
-	transform-origin: top left;
+	transform-origin: bottom left;
 	${({ $scale }) => css`
 		transform: scale(${$scale});
 	`}

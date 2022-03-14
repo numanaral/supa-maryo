@@ -1,13 +1,8 @@
 import { memo } from 'react';
 import styled, { css } from 'styled-components/macro';
 import { useGameState } from 'game/hooks';
-import { Game } from 'game/types';
 import { MAP_HEIGHT, MAPS } from './constants';
 import Scaled from '../Scaled';
-
-interface Props {
-	level: Game.Levels;
-}
 
 const Wrapper = memo(styled(Scaled)<{
 	$mapBg: string;
@@ -15,6 +10,8 @@ const Wrapper = memo(styled(Scaled)<{
 }>`
 	${({ $mapBg, $h }) => css`
 		background-image: url(${$mapBg});
+		background-position: bottom left;
+		background-repeat: no-repeat;
 		height: ${$h}px;
 	`}
 `);
@@ -33,5 +30,4 @@ const GameMap = () => {
 	);
 };
 
-export type { Props as GameMapProps };
 export default GameMap;
