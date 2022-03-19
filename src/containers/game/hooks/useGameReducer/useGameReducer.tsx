@@ -2,7 +2,12 @@ import { useMemo } from 'react';
 import { useImmerReducer } from 'use-immer';
 import { Game } from 'game/types';
 import { calculateGameScale } from 'game/utils';
-import { CharacterAction, InternalAction } from 'game/enums';
+import {
+	CharacterAction,
+	ExternalAction,
+	InternalAction,
+	KeyboardAction,
+} from 'game/enums';
 import { WindowEvent } from 'hooks';
 import reducer from './reducer';
 import getInitialState from './initialState';
@@ -36,6 +41,31 @@ const useGameReducer = (playerOptions?: Game.PlayerOptions): Game.Context => {
 			onCharacterAction: (action: CharacterAction) => {
 				gameDispatch({ type: action });
 			},
+			onKeyDown: newAction => {
+				gameDispatch({ type: KeyboardAction.KeyDown, newAction });
+			},
+			onKeyUp: removedAction => {
+				gameDispatch({ type: KeyboardAction.KeyUp, removedAction });
+			},
+			setKeyboardConfig: keyboardConfig => {
+				gameDispatch({
+					type: ExternalAction.SetKeyboardConfig,
+					keyboardConfig,
+				});
+			},
+			// STRETCH_GOAL: Annoying-mario
+			// setPosition: position => {
+			// 	gameDispatch({ type: ExternalAction.SetPosition, position });
+			// },
+			// setActions: actions => {
+			// 	gameDispatch({ type: ExternalAction.SetActions, actions });
+			// },
+			// setState: state => {
+			// 	gameDispatch({ type: ExternalAction.SetState, state });
+			// },
+			// setDirection: direction => {
+			// 	gameDispatch({ type: ExternalAction.SetDirection, direction });
+			// },
 		};
 	}, [gameDispatch]);
 

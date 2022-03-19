@@ -11,6 +11,14 @@ enum InternalAction {
 	Fall = 'Fall',
 }
 
+enum ExternalAction {
+	SetKeyboardConfig = 'SetKeyboardConfig',
+	SetPosition = 'SetPosition',
+	SetActions = 'SetActions',
+	SetState = 'SetState',
+	SetDirection = 'SetDirection',
+}
+
 enum CharacterPosition {
 	OnTile = 'OnTile',
 	InAir = 'InAir',
@@ -36,10 +44,17 @@ enum Direction {
 	Left = 'Left',
 }
 
+enum KeyboardAction {
+	KeyDown = 'KeyDown',
+	KeyUp = 'KeyUp',
+}
+
 export {
 	CharacterAction,
 	InternalAction,
+	ExternalAction,
 	CharacterPosition,
 	CharacterState,
 	Direction,
+	KeyboardAction,
 };

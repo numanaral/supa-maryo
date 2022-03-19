@@ -1,6 +1,14 @@
 import { WindowEvent } from 'hooks';
 import * as KeyCode from 'keycode-js';
-import { CharacterAction, InternalAction } from './enums';
+import {
+	CharacterAction,
+	CharacterState as CharacterStateEnum,
+	CharacterPosition,
+	Direction,
+	InternalAction,
+	ExternalAction,
+	KeyboardAction,
+} from './enums';
 
 namespace Game {
 	export type Levels = '1-1' | '1-1-secret';
@@ -27,6 +35,11 @@ namespace Game {
 		character: Characters;
 		bottom: Position;
 		left: Position;
+		actions: Array<CharacterAction>;
+		state: CharacterStateEnum;
+		position: CharacterPosition;
+		direction: Direction;
+		keyboardConfig: Keyboard.KeyboardConfig;
 	}
 
 	export interface ConstraintState {
@@ -51,6 +64,14 @@ namespace Game {
 
 	export interface CharacterActions {
 		onCharacterAction: (action: CharacterAction) => void;
+		onKeyDown: (newAction: CharacterAction) => void;
+		onKeyUp: (removedAction: CharacterAction) => void;
+		setKeyboardConfig: (keyboardConfig: Keyboard.KeyboardConfig) => void;
+		// STRETCH_GOAL: Annoying-mario
+		// setPosition: (position: CharacterPosition) => void;
+		// setActions: (actions: CharacterActions) => void;
+		// setState: (state: CharacterState) => void;
+		// setDirection: (direction: Direction) => void;
 	}
 
 	// TODO: Rename to ExternalActions.
@@ -64,7 +85,37 @@ namespace Game {
 		| Utils.ReducerAction<InternalAction.Fall>
 		| Utils.ReducerAction<InternalAction.Resize, { scale: Scale }>;
 
-	export type ExternalReducerActions = Utils.ReducerAction<CharacterAction>;
+	export type ExternalReducerActions =
+		| Utils.ReducerAction<CharacterAction>
+		| Utils.ReducerAction<
+				KeyboardAction.KeyDown,
+				{ newAction: CharacterAction }
+		  >
+		| Utils.ReducerAction<
+				KeyboardAction.KeyUp,
+				{ removedAction: CharacterAction }
+		  >
+		| Utils.ReducerAction<
+				ExternalAction.SetKeyboardConfig,
+				{ keyboardConfig: Keyboard.KeyboardConfig }
+		  >;
+	// STRETCH_GOAL: Annoying-mario
+	// | Utils.ReducerAction<
+	// 		ExternalAction.SetPosition,
+	// 		{ position: CharacterPosition }
+	//   >
+	// | Utils.ReducerAction<
+	// 		ExternalAction.SetActions,
+	// 		{ actions: CharacterActions }
+	//   >
+	// | Utils.ReducerAction<
+	// 		ExternalAction.SetState,
+	// 		{ state: CharacterState }
+	//   >
+	// | Utils.ReducerAction<
+	// 		ExternalAction.SetDirection,
+	// 		{ direction: Direction }
+	//   >;
 
 	export interface Context {
 		state: State;
