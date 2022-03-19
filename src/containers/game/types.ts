@@ -1,11 +1,13 @@
+import { WindowEvent } from 'hooks';
 import * as KeyCode from 'keycode-js';
-import { CharacterAction } from './enums';
+import { CharacterAction, InternalAction } from './enums';
 
 namespace Game {
 	export type Levels = '1-1' | '1-1-secret';
 	export type Characters = 'mario' | 'luigi';
 	export type Scale = number;
 	export type Position = Unit.Pixel;
+	export type JumpLimit = Unit.Pixel;
 
 	// TODO:
 	export interface MapConfig {
@@ -27,32 +29,54 @@ namespace Game {
 		left: Position;
 	}
 
+	export interface ConstraintState {
+		jumpLimit: JumpLimit;
+		// maxJumpPosition: Position;
+		minFallPosition: Position;
+	}
+
+	export interface VariableState {
+		jumpedAmount: Unit.Pixel;
+		isJumping: boolean;
+		isFalling: boolean;
+	}
+
 	export interface State {
 		view: ViewState;
 		level: LevelState;
 		character: CharacterState;
+		constraint: ConstraintState;
+		variable: VariableState;
 	}
 
 	export interface CharacterActions {
 		onCharacterAction: (action: CharacterAction) => void;
 	}
 
+	// TODO: Rename to ExternalActions.
 	export interface Actions extends CharacterActions {}
+	export interface InternalActions {
+		onResize: (e: WindowEvent) => void;
+		onFall: () => void;
+	}
+
+	export type InternalReducerActions =
+		| Utils.ReducerAction<InternalAction.Fall>
+		| Utils.ReducerAction<InternalAction.Resize, { scale: Scale }>;
+
+	export type ExternalReducerActions = Utils.ReducerAction<CharacterAction>;
 
 	export interface Context {
 		state: State;
+		internalActions: InternalActions;
+		// TODO: Rename to ExternalActions.
 		actions: Actions;
 	}
 
 	// TODO: Possibly move to a separate namespace.
 	export type ReducerActions =
-		| {
-				type: CharacterAction;
-		  }
-		| {
-				type: 'Resize';
-				scale: number;
-		  };
+		| InternalReducerActions
+		| ExternalReducerActions;
 
 	export interface PlayerOptions {
 		level?: Levels;
@@ -101,6 +125,13 @@ namespace Utils {
 	 * ```
 	 */
 	export type ValuesOf<T> = Exclude<T[KeysOf<T>], Function>;
+
+	export type ReducerAction<
+		Action extends string,
+		Rest extends object = {}
+	> = {
+		type: Action;
+	} & Rest;
 }
 
 namespace Unit {

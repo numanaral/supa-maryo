@@ -4,6 +4,7 @@ import * as KeyCode from 'keycode-js';
 import { MAP_HEIGHT } from 'game/components/GameMap/constants';
 import { CharacterAction } from './enums';
 import { Game, Keyboard } from './types';
+import { MAX_JUMP_DISTANCE } from './components/GameCharacter';
 
 const DEFAULT_PLAYER_OPTIONS: Required<Game.PlayerOptions> = {
 	level: '1-1',
@@ -21,6 +22,15 @@ const DEFAULT_GAME_OPTIONS: Omit<Game.State, 'utils'> = {
 		character: 'mario',
 		bottom: MAP_HEIGHT,
 		left: 0,
+	},
+	constraint: {
+		jumpLimit: MAX_JUMP_DISTANCE,
+		minFallPosition: 0,
+	},
+	variable: {
+		jumpedAmount: 0,
+		isJumping: false,
+		isFalling: false,
 	},
 };
 

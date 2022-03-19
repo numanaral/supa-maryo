@@ -3,3 +3,4 @@ export { default as getCharacterActionFromKeyCode } from './getCharacterActionFr
 export { default as getCharacterStateAndDirectionFromActionAndPosition } from './getCharacterStateAndDirectionFromActionAndPosition';
 export { default as getDemoClasses } from './getDemoClasses';
 export { default as getMapConfig } from './getMapConfig';
+export { default as getScaledSize } from './getScaledSize';
