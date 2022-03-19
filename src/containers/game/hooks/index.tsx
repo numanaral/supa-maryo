@@ -1,3 +1,4 @@
+export { default as useGameEffects } from './useGameEffects';
 export { default as useGameReducer } from './useGameReducer';
 export { default as useCharacterState } from './useCharacterState';
 export { default as useGameActions } from './useGameActions';

@@ -1,4 +1,5 @@
 import { GameProvider } from 'game/providers';
+import { useGameEffects } from 'game/hooks';
 import { Game } from 'game/types';
 import GameMap from '../GameMap';
 import GameContainer from '../GameContainer';
@@ -9,16 +10,23 @@ interface Props {
 	playerOptions?: Game.PlayerOptions;
 }
 
-const GameWindow = ({ playerOptions }: Props) => {
+const GameWindow = () => {
+	useGameEffects();
+	return (
+		<GameContainer>
+			<GameMap />
+			<GameCharacter />
+		</GameContainer>
+	);
+};
+
+const Wrapper = ({ playerOptions }: Props) => {
 	return (
 		<GameProvider playerOptions={playerOptions}>
-			<GameContainer>
-				<GameMap />
-				<GameCharacter />
-			</GameContainer>
+			<GameWindow />
 		</GameProvider>
 	);
 };
 
 export type { Props as GameWindowProps };
-export default GameWindow;
+export default Wrapper;
