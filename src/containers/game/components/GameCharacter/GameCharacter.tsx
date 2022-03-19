@@ -12,16 +12,19 @@ import './styles.scss';
 const demoClasses = getDemoClasses();
 
 const GameCharacter = () => {
-	const { character, bottom, left } = useCharacterState();
+	const {
+		character,
+		bottom,
+		left,
+		actions,
+		state: characterState,
+		direction: characterDirection,
+	} = useCharacterState();
 	const { onCharacterAction } = useGameActions();
 
 	const characterBg = CHARACTERS[character];
 
-	const {
-		actions,
-		state: characterState,
-		direction: characterDirection,
-	} = useHandleCharacterActions();
+	useHandleCharacterActions();
 
 	useInterval(
 		() => {
