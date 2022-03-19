@@ -6,6 +6,11 @@ enum CharacterAction {
 	Fire = 'Fire',
 }
 
+enum InternalAction {
+	Resize = 'Resize',
+	Fall = 'Fall',
+}
+
 enum CharacterPosition {
 	OnTile = 'OnTile',
 	InAir = 'InAir',
@@ -31,4 +36,10 @@ enum Direction {
 	Left = 'Left',
 }
 
-export { CharacterAction, CharacterPosition, CharacterState, Direction };
+export {
+	CharacterAction,
+	InternalAction,
+	CharacterPosition,
+	CharacterState,
+	Direction,
+};
