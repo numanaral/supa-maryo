@@ -32,7 +32,7 @@ const GameCharacter = () => {
 			actions.forEach(onCharacterAction);
 		},
 		MOVE_INTERVAL,
-		!actions
+		!actions.length
 	);
 
 	return (
