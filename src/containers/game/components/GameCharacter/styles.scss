@@ -37,7 +37,9 @@ $stateConfig:
 	height: #{$spriteBlockSize}px;
 
 	position: absolute;
-	z-index: 9999;
+	left: 0;
+	bottom: 0;
+	z-index: 1;
 	transition-duration: 50ms;
 	transition-property: bottom left;
 	transition-timing-function: ease-in-out;
