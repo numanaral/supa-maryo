@@ -1,21 +1,24 @@
 import { useInterval } from 'hooks';
 import { MOVE_INTERVAL } from 'game/components';
+import { CharacterAction } from 'game/enums';
 import useInternalGameActions from '../useInternalGameActions';
 import useVariableState from '../useVariableState';
+import useCharacterState from '../useCharacterState';
 
 const useFallEffect = () => {
-	const { isFalling /* isJumping */ } = useVariableState();
-	// TODO: Maybe create internal actions not shared in GameActions?
-	// or use dispatch directly?
+	const { actions } = useCharacterState();
+	const { isFalling, isJumping } = useVariableState();
 	const { onFall } = useInternalGameActions();
+
 	useInterval(
 		() => {
-			// if jumping state but key not pressed, return
+			// We will start the fall action when the character stops jumping.
+			if (isJumping && actions.includes(CharacterAction.Jump)) return;
+			// Or when the character is already falling.
 			onFall();
 		},
 		MOVE_INTERVAL,
-		// !isFalling && !isJumping
-		!isFalling
+		!isFalling && !isJumping
 	);
 };
 
