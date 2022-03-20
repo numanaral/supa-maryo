@@ -2,9 +2,8 @@ import { memo } from 'react';
 import styled, { css } from 'styled-components/macro';
 import { useGameState } from 'game/hooks';
 import { MAP_HEIGHT, MAPS } from './constants';
-import Scaled from '../Scaled';
 
-const Wrapper = memo(styled(Scaled)<{
+const Wrapper = memo(styled.div<{
 	$mapBg: string;
 	$h: number;
 }>`
