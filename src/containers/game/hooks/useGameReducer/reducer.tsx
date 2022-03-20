@@ -9,10 +9,7 @@ import {
 	KeyboardAction,
 } from 'game/enums';
 import { MOVE_DISTANCE } from 'game/components/GameCharacter/constants';
-import {
-	getCharacterStateAndDirectionFromActionAndPosition,
-	getScaledSize,
-} from 'game/utils';
+import { getCharacterStateAndDirectionFromActionAndPosition } from 'game/utils';
 
 const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 	draft,
@@ -26,13 +23,6 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 	} = character;
 	const { jumpLimit } = constraint;
 	const { isFalling, isJumping, jumpedAmount } = variable;
-	const { scale } = view;
-
-	const getScaledValue = (val: number) => {
-		return getScaledSize(val, scale);
-	};
-
-	const scaledJumpLimit = getScaledValue(jumpLimit);
 
 	const getActionIndex = (characterAction: CharacterAction) => {
 		return currentActions.findIndex(currentAction => {
@@ -139,7 +129,7 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 			// if hitting tile, trigger falling.
 
 			// Don't allow jumping if the jump limit is hit.
-			if (jumpedAmount >= scaledJumpLimit) {
+			if (jumpedAmount >= jumpLimit) {
 				// Trigger falling.
 				variable.isFalling = true;
 				break;

@@ -11,7 +11,7 @@ const CHARACTERS: Record<Game.Characters, string> = {
 /* eslint-enable global-require */
 
 const MOVE_INTERVAL: Unit.Ms = 50;
-const MOVE_DISTANCE: Unit.Pixel = 10;
+const MOVE_DISTANCE: Unit.Pixel = 5;
 // 5-1 as we use the bottom left.
 const MAX_JUMP_DISTANCE: Unit.Pixel = 4 * CHARACTER_SIZE;
 const LEFT_MIN: Unit.Pixel = 0;
