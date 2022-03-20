@@ -37,9 +37,12 @@ const GameCharacter = () => {
 	return (
 		<div
 			className={`character-wrapper pixel-art${demoClasses}`}
+			// NOTE: Using bottom and left to move the character will leave
+			// repaint marks on the screen. Although performance is not a big
+			// issue, using transform will be beneficial in both paint issues
+			// and performance, so we are going with transform.
 			style={{
-				bottom,
-				left,
+				transform: `translate(${left}px, -${bottom}px)`,
 			}}
 		>
 			<div
