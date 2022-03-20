@@ -48,7 +48,10 @@ const getCharacterStateAndDirectionBasedOnActionsAndPosition = (
 	} else if (isJumping) {
 		state = CharacterState.Jumping;
 	} else if (includesAction(CharacterAction.Crouch)) {
-		state = CharacterState.Crouching;
+		state =
+			characterPosition === CharacterPosition.InAir
+				? CharacterState.Jumping
+				: CharacterState.Crouching;
 	} else if (includesAction(CharacterAction.Fire)) {
 		state = CharacterState.Firing;
 	}
