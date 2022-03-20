@@ -34,21 +34,43 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 
 	const scaledJumpLimit = getScaledValue(jumpLimit);
 
+	const getActionIndex = (characterAction: CharacterAction) => {
+		return currentActions.findIndex(currentAction => {
+			return currentAction === characterAction;
+		});
+	};
+
+	const addAction = (characterAction: CharacterAction) => {
+		character.actions.push(characterAction);
+	};
+
+	const removeAction = (actionIndex: number) => {
+		character.actions.splice(actionIndex, 1);
+	};
+
 	switch (action.type) {
 		case KeyboardAction.KeyDown: {
 			const newActions: Array<CharacterAction> = [];
 			const { newAction } = action;
-			// Only add a new action if it doesn't already exist.
-			if (!currentActions.includes(newAction)) {
-				newActions.push(newAction);
-				character.actions.push(newAction);
+
+			// If the user is pressing the Jump key while falling, ignore the
+			// jump action or remove it from the actions if it exists.
+			const isJumpingAction = newAction === CharacterAction.Jump;
+			const newActionIndex = getActionIndex(newAction);
+			if (isJumpingAction && isFalling) {
+				if (newActionIndex >= 0) removeAction(newActionIndex);
+				break;
 			}
 
-			// NOTE: currentActions will contain the new state.
+			// Only add a new action if it doesn't already exist.
+			if (newActionIndex < 0) {
+				newActions.push(newAction);
+				addAction(newAction);
+			}
 
 			const { state: newState, direction: newDirection } =
 				getCharacterStateAndDirectionFromActionAndPosition(
-					currentActions,
+					character.actions,
 					currentPosition
 				);
 
@@ -60,26 +82,20 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 		}
 		case KeyboardAction.KeyUp: {
 			const { removedAction } = action;
-			const removedActionIndex = currentActions.findIndex(
-				currentAction => {
-					return currentAction === removedAction;
-				}
-			);
+			const removedActionIndex = getActionIndex(removedAction);
 			// Don't continue if we didn't have such action.
 			if (removedActionIndex < 0) break;
 
-			character.actions.splice(removedActionIndex, 1);
-
-			// NOTE: currentActions will contain the new state.
+			removeAction(removedActionIndex);
 
 			let newState = CharacterState.Standing;
-			if (!currentActions.length) {
+			if (!character.actions.length) {
 				if (isFalling || isJumping) {
 					newState = CharacterState.Jumping;
 				}
 			} else {
 				newState = getCharacterStateAndDirectionFromActionAndPosition(
-					currentActions,
+					character.actions,
 					currentPosition
 				).state;
 			}
@@ -116,10 +132,10 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 				break;
 			}
 
-			// Don't allow jumping when there is a monster.
+			// TODO: Don't allow jumping when there is a monster.
 			// if hitting monster, trigger death.
 
-			// Don't allow jumping if there is a tile.
+			// TODO: Don't allow jumping if there is a tile.
 			// if hitting tile, trigger falling.
 
 			// Don't allow jumping if the jump limit is hit.
@@ -142,12 +158,29 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 			character.bottom -= MOVE_DISTANCE;
 			break;
 		case InternalAction.Fall:
+			// TODO: Don't allow falling when there is a monster.
+			// if hitting monster, trigger jump.
+
+			// TODO: Don't allow falling if there is a tile.
+			// if hitting tile, stop falling.
+
 			if (jumpedAmount <= 0) {
 				variable.isFalling = false;
-				character.state = CharacterState.Standing;
 				character.position = CharacterPosition.OnTile;
+
+				const newState =
+					getCharacterStateAndDirectionFromActionAndPosition(
+						currentActions,
+						character.position
+					).state;
+				character.state = newState;
 				break;
 			}
+
+			// Handle external actions.
+			if (!isFalling) variable.isFalling = true;
+			if (isJumping) variable.isJumping = false;
+
 			variable.jumpedAmount -= MOVE_DISTANCE;
 			character.bottom -= MOVE_DISTANCE;
 			// STRETCH_GOAL: Cheat mode.
