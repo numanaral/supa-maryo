@@ -51,6 +51,7 @@ const DEFAULT_GAME_OPTIONS: Omit<Game.State, 'utils'> = {
 	},
 	variable: {
 		jumpedAmount: 0,
+		shouldResetJump: false,
 		isJumping: false,
 		isFalling: false,
 	},
