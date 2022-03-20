@@ -145,7 +145,6 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 			break;
 		case CharacterAction.Crouch:
 			// STRETCH_GOAL: Cheat mode.
-			character.bottom -= MOVE_DISTANCE;
 			break;
 		case InternalAction.Fall:
 			// TODO: Don't allow falling when there is a monster.
