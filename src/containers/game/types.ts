@@ -49,7 +49,15 @@ namespace Game {
 	}
 
 	export interface VariableState {
+		/**
+		 * Used to calculate the max amount to be jumped.
+		 */
 		jumpedAmount: Unit.Pixel;
+		/**
+		 * Prevent user from holding the jump key and continuously jumping. Each
+		 * new jump requires a key up followed by a key down.
+		 */
+		shouldResetJump: boolean;
 		isJumping: boolean;
 		isFalling: boolean;
 	}
