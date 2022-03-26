@@ -1,46 +1,27 @@
-# Getting Started with Create React App
+# supa-maryo (No further planned development at this time..)
+- Live at: [numanaral.github.io/supa-maryo](https://numanaral.github.io/supa-maryo/).
+- Built purely with web (React, ts & scss) without WebGL, canvas or any game library/framework.
+  - You can inspect objects in the game and mess around with them directly in the Debugger Tools!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What's the current progress:
+- You can check the Project & issues for what was completed, but basically you can only really just move around at this point. I only had about 3-4 days to work on it, so the main progress was going to come this weekend (MapEditor, collision, mobs and game state).
 
-## Available Scripts
+## Why create this?	
+- I actually started working on it for a React Summit conference which I was asked to become a speaker for.
+  - Becoming a speaker was a life goal / dream for me, and I wanted to talk about something interesting and not covered by every single react dev already.
+  - The goal with this project was not "building a game", but rather show "how to leverage react and its super powers" to create a fast-paced environment which needs handling various states, reacting to events, ways to optimize things, forward-thinking, pain points and their resolutions and so much more. I have been doing react for a long time and I can say that building a games with react allowed me to have deeper understanding of its inner workings. (thus why I thought this would be a great topic) 
+  - The speakers were selected based on the usefulness of their topics (which I didn't really put much thought into), and I guess my topic was considered useless. I was just too naive to think that I was hand-picked to give a speech.
+  - After working on this for on this for two weekends and not hearing anything, I decided to ask what's happening. Turns out, I wasn't selected. Would have been nice if I was told right away at least, but oh well.
+  - I was once reminded again not to have high hopes on anything.
 
-In the project directory, you can run:
+## So, what are the next steps?	
+- Well I am actually quite busy working on some contract projects on the side (on top of my FT work), so I probably won't have any time to work on this as this is no longer a priority for me.
+- I would love to come back to it at some point as I quite enjoyed building it, also would be nice to at least finish the core game, but who knows when that will happen.
+- I actually had another game in my mind to work from a long time ago, so I may even just completely ditch this and never come back to it.
+- Only time will tell..
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Sources for the assets / sprites:
+- Note that I modified the sprite-sheets to make life easy for me and to further optimize lodaing assets.
+  - You can check originals vs the edited versions in the assets folder.
+- [mariomayhem.com](https://www.mariomayhem.com/)
+- [spriters-resource.com](https://www.spriters-resource.com/)
