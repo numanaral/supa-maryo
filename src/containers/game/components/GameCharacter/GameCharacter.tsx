@@ -1,5 +1,5 @@
 import {
-	useCharacterState,
+	useGameState,
 	useGameActions,
 	useHandleCharacterActions,
 } from 'game/hooks';
@@ -12,13 +12,16 @@ const demoClasses = getDemoClasses();
 
 const GameCharacter = () => {
 	const {
-		character,
-		bottom,
-		left,
-		actions,
-		state: characterState,
-		direction: characterDirection,
-	} = useCharacterState();
+		character: {
+			character,
+			bottom,
+			left,
+			actions,
+			state: characterState,
+			direction: characterDirection,
+		},
+		view: { scale, width },
+	} = useGameState();
 	const { onCharacterAction } = useGameActions();
 
 	const characterBg = CHARACTERS[character];
@@ -34,6 +37,17 @@ const GameCharacter = () => {
 		!actions.length
 	);
 
+	let translateX = left;
+	const translateY = bottom;
+
+	const windowSize = window.innerWidth / scale;
+	const halfWindowSize = windowSize / 2;
+	const maxWidth = width - halfWindowSize;
+	// Calculating from the center of the screen.
+	const leftInScreen = halfWindowSize + Math.max(0, left - maxWidth);
+
+	translateX = Math.min(left, leftInScreen);
+
 	return (
 		<div
 			className={`character-wrapper pixel-art${demoClasses}`}
@@ -42,7 +56,8 @@ const GameCharacter = () => {
 			// issue, using transform will be beneficial in both paint issues
 			// and performance, so we are going with transform.
 			style={{
-				transform: `translate(${left}px, -${bottom}px)`,
+				transform: `translate(${translateX}px, -${translateY}px)`,
+				// transform: `translate(${left}px, -${bottom}px)`,
 			}}
 		>
 			<div

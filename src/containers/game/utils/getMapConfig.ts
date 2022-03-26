@@ -6,10 +6,12 @@ const getMapConfig = (level: Game.Levels) => {
 		'1-1': {
 			characterBottom: TILE_SIZE * 2,
 			characterLeft: 0,
+			width: 3376,
 		},
 		'1-1-secret': {
 			characterBottom: MAP_HEIGHT - TILE_SIZE * 3,
 			characterLeft: TILE_SIZE * 1.5,
+			width: 272,
 		},
 	};
 

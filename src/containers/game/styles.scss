@@ -1,4 +1,13 @@
+// Firefox behavior is a little weird, lets keep these for reference her for
+// but ensure that it has a proper behavior for chrome.
 .pixel-art {
+	image-rendering: optimizeSpeed;
+	// image-rendering: optimize-contrast;
+	// image-rendering: -moz-crisp-edges;
+	// image-rendering: -webkit-optimize-contrast;
 	image-rendering: pixelated;
 	image-rendering: crisp-edges;
+	// -ms-interpolation-mode: nearest-neighbor;
+	// font-smooth: antialiased;
+	// font-smooth: subpixel-antialiased;
 }

@@ -9,7 +9,10 @@ import {
 	InternalAction,
 	KeyboardAction,
 } from 'game/enums';
-import { MOVE_DISTANCE } from 'game/components/GameCharacter/constants';
+import {
+	MOVE_DISTANCE,
+	CHARACTER_SIZE,
+} from 'game/components/GameCharacter/constants';
 import { getCharacterStateAndDirectionFromActionAndPosition } from 'game/utils';
 
 const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
@@ -24,6 +27,9 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 	} = character;
 	const { jumpLimit } = constraint;
 	const { isFalling, shouldResetJump, isJumping, jumpedAmount } = variable;
+	const { width: mapWidth } = view;
+
+	const maxLeft = mapWidth - CHARACTER_SIZE;
 
 	const getActionIndex = (characterAction: CharacterAction) => {
 		return currentActions.findIndex(currentAction => {
@@ -53,6 +59,7 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 
 			// Original game stops when leftmost part of the map is hit.
 			const isRunLeftAction = newAction === CharacterAction.RunLeft;
+			const isRunRightAction = newAction === CharacterAction.RunRight;
 			if (currentLeft <= 0) {
 				// If we can no longer go left, remove it from actions.
 				removeActionIfItExists(CharacterAction.RunLeft);
@@ -72,6 +79,26 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 
 				// This should never happen.
 				if (currentLeft < 0) character.left = 0;
+			} else if (currentLeft >= maxLeft) {
+				// TODO: We might want to check the flag as the maxLeft.
+				// If we can no longer go right, remove it from actions.
+				removeActionIfItExists(CharacterAction.RunRight);
+
+				// If the current action is the run right action, stop execution.
+				if (isRunRightAction) {
+					shouldNotExecuteAction = true;
+
+					// Direction should change even if we don't take the action.
+					character.direction = Direction.Right;
+				}
+
+				// If the character is not in the air, change state to standing.
+				if (currentPosition !== CharacterPosition.InAir) {
+					character.state = CharacterState.Standing;
+				}
+
+				// This should never happen.
+				if (currentLeft >= maxLeft) character.left = maxLeft;
 			}
 
 			// If the user is pressing the Jump key while falling, ignore the
@@ -152,10 +179,19 @@ const gameReducer: Reducer<Game.State, Game.ReducerActions> = (
 		// case ExternalAction.SetDirection:
 		// 	character.direction = action.direction;
 		// 	break;
-		case CharacterAction.RunRight:
+		case CharacterAction.RunRight: {
+			// TODO: We might want to check the flag as the maxLeft.
+			// Handles the case for when the character is jumping and running
+			// right and the user releases the jump key. The keydown action
+			// won't be called so we need to watch out for this.
+			if (currentLeft >= maxLeft) {
+				removeActionIfItExists(CharacterAction.RunLeft);
+				break;
+			}
 			character.left += MOVE_DISTANCE;
 
 			break;
+		}
 		case CharacterAction.RunLeft:
 			// Handles the case for when the character is jumping and running
 			// left and the user releases the jump key. The keydown action won't

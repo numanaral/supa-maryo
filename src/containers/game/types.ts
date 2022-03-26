@@ -21,10 +21,12 @@ namespace Game {
 	export interface MapConfig {
 		characterBottom: Position;
 		characterLeft: Position;
+		width: Unit.Pixel;
 	}
 
 	export interface ViewState {
 		scale: Scale;
+		width: Unit.Pixel;
 	}
 
 	export interface LevelState {
