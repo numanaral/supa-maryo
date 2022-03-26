@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/supa-maryo/static/css/main.6a0433ab.css",
+    "main.js": "/supa-maryo/static/js/main.3db509c3.js",
+    "static/js/27.66b8ade5.chunk.js": "/supa-maryo/static/js/27.66b8ade5.chunk.js",
+    "static/media/1-1.png": "/supa-maryo/static/media/1-1.7e0427bf0f475d779b70.png",
+    "index.html": "/supa-maryo/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.6a0433ab.css",
+    "static/js/main.3db509c3.js"
+  ]
+}
