@@ -31,6 +31,7 @@ const DEFAULT_KEYBOARD_CONFIG: Keyboard.KeyboardConfig = {
 const DEFAULT_GAME_OPTIONS: Omit<Game.State, 'utils'> = {
 	view: {
 		scale: 1,
+		width: 4000,
 	},
 	level: {
 		level: '1-1',

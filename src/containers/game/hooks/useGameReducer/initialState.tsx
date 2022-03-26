@@ -11,7 +11,7 @@ const getInitialState = (playerOptions?: Game.PlayerOptions) => {
 	const mapConfig = getMapConfig(_playerOptions.level);
 	return {
 		...DEFAULT_GAME_OPTIONS,
-		view: { scale },
+		view: { scale, width: mapConfig.width },
 		level: {
 			...DEFAULT_GAME_OPTIONS.level,
 			level: _playerOptions.level,
