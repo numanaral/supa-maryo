@@ -1,7 +1,7 @@
 {
   "name": "supa-maryo",
   "version": "0.1.0",
-  "private": true,
+  "homepage": "http://numanaral.github.io/supa-maryo",
   "dependencies": {
     "@craco/craco": "^6.4.3",
     "@testing-library/jest-dom": "^5.16.2",
